@@ -1,0 +1,184 @@
+.container {
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+.reset-button {
+    width: 100px;
+    height: 25px;
+    margin: 0 auto;
+    border-radius: 2px;
+    color: #fff;
+}
+
+.post-container {
+    margin: 50px 0 0 0;
+}
+
+.post-container:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.post-item {
+    width: calc(100% / 3);
+    float: left;
+    box-sizing: border-box;
+    padding: 0 20px;
+    margin-bottom: 30px;
+}
+
+.post-item .input,
+.post-item .edit-area,
+.post-item.editing .btn-edit,
+.post-item.editing .text {
+    display: none;
+}
+
+.post-item.editing .input,
+.post-item.editing .edit-area {
+    display: inline-block;
+}
+
+.post-item:nth-child(3n+1) {
+    clear: left;
+}
+
+.post-main {
+    border: 1px solid #ddd;
+    margin: 0 auto 50px;
+    text-align: left;
+    font-size: 13px;
+    position: relative;
+}
+
+.post-main + .post-main {
+    border-top: 5px solid #ddd;
+}
+
+.post-main .number {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #666;
+    color: #fff;
+    text-align: center;
+    line-height: 8px;
+    font-weight: bold;
+    left: -1px;
+    bottom: 100%;
+}
+
+.post-main .btn-delete, .btn-edit {
+    position: absolute;
+    background: #666;
+    color: #fff;
+    text-align: center;
+    line-height: 8px;
+    font-weight: bold;
+    right: -1px;
+    bottom: 100%;
+    border: 0;
+    padding: 9px 15px 10px;
+    cursor: pointer;
+}
+
+.post-main .btn-edit {
+    bottom: -26px;
+    width: calc(100% + 2px);
+    background: #828694;
+}
+
+.post-main .edit-area {
+    bottom: -26px;
+    z-index: 5;
+    width: calc(100% + 2px);
+    position: absolute;
+    text-align: center;
+    line-height: 8px;
+    border: 0;
+    font-weight: bold;
+    padding: 0;
+    left: -1px;
+}
+
+.post-main .edit-area:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.post-main .edit-area button {
+    width: 50%;
+    float: left;
+    border: 0;
+    padding: 6px 15px;
+    cursor: pointer;
+}
+
+.post-main .edit-area .btn-edit-ok {
+    background: #828694;
+    color: #ddd;
+}
+
+.post-main .edit-area .btn-edit-cancel {
+    background: #eee;
+    color: #828694;
+}
+
+.post-main div {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    color: #828694;
+}
+
+.post-main div p {
+    margin: 0;
+}
+
+.post-main div b {
+    width: 120px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.post-main div span {
+    display: inline-block;
+    width: calc(100% - 120px);
+}
+
+/*-- Add Post --*/
+.add-post-container {
+    width: 400px;
+    margin: 50px auto;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    padding: 10px 25px 55px;
+    box-sizing: border-box;
+    border-radius: 5px;
+    position: relative;
+}
+
+.add-post-container .title {
+    font-size: 18px;
+}
+
+.add-post-container input {
+    width: 100%;
+    margin: 0 0 15px;
+}
+
+.add-post-container input+ input {
+    margin-top: 10px;
+}
+
+.add-post-container button {
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 0 0 5px 5px;
+}
