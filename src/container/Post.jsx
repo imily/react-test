@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import posts from '../Data/posts';
 import PostDom from '../component/PostDom';
 
-
 class Post extends Component {
   constructor(props) {
     super(props);
@@ -35,13 +34,17 @@ class Post extends Component {
   render() {
     return (
       <div className="container">
+        <button
+          className='reset-button'
+          onClick={() => {this.resetData(posts)}}
+          data-testid="display_posts"
+        >
+          Reset Data
+        </button>
         <PostDom
-          resetData={this.resetData}
           putPostToStorage={this.putPostToStorage}
           getPosts={this.getPosts}
           postList={this.state.postList}
-          posts={posts}
-          list={this.state.postList}
         />
       </div>
     );

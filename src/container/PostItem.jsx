@@ -13,8 +13,7 @@ class PostItem extends Component {
       }
     };
   }
-  deletePost = (id) => {
-    const posts = this.props.postList;
+  deletePost = (id, posts) => {
     const newPosts = posts.filter((item) => {
       return item.id !== id
     });
@@ -48,19 +47,18 @@ class PostItem extends Component {
     this.setState({
       ...this.state,
       editContent: { ...cloneStateEdit }
-    }, () => {console.log(this.state);});
+    });
   };
-  submitEdit = (item) => {
-    const newPosts = JSON.parse(localStorage.getItem('posts'));
-    for (let i = 0; i < newPosts.length; i++) {
-      const newPost = newPosts[i];
+  submitEdit = (item, postList) => {
+    for (let i = 0; i < postList.length; i++) {
+      const newPost = postList[i];
       if (newPost.id === item.id) {
         newPost.topic = this.state.editContent.topic;
         newPost.description = this.state.editContent.description;
       }
     }
 
-    this.props.putPostToStorage(newPosts);
+    this.props.putPostToStorage(postList);
     this.props.getPosts();
     this.clearEdit();
   };
