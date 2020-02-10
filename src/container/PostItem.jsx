@@ -13,8 +13,8 @@ class PostItem extends Component {
       }
     };
   }
-  deletePost = (id, posts) => {
-    const newPosts = posts.filter((item) => {
+  deletePost = (id) => {
+    const newPosts = this.props.postList.filter((item) => {
       return item.id !== id
     });
     this.props.putPostToStorage(newPosts);

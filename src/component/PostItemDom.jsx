@@ -9,7 +9,7 @@ class PostItemDom extends Component {
         <div className="number" data-testid="number_post">{item.id}</div>
         <button
           className="btn-delete"
-          onClick={() => {this.props.deletePost(item.id, this.props.postList)}}
+          onClick={() => {this.props.deletePost(item.id)}}
           data-testid="delete_post"
         >
           Delete

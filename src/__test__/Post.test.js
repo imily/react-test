@@ -1,13 +1,10 @@
 import React from 'react';
 import 'jest-localstorage-mock';
-import { render, fireEvent, cleanup, within } from '@testing-library/react';
-import Post from '../container/Post';
+import { render, fireEvent, cleanup } from '@testing-library/react';
 import AddPost from '../container/AddPost';
 import PostItem from '../container/PostItem';
 import PostDom from '../component/PostDom';
-import PostItemDom from '../component/PostItemDom';
 
-const key = 'posts';
 const value = [
   {
     "id": 1,
@@ -25,31 +22,7 @@ const value = [
 
 afterEach(cleanup);
 
-
-test('Test localStorage normal', () => {
-  const localStorageMock = {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    clear: jest.fn()
-  };
-  global.localStorage = localStorageMock;
-  render(<Post />);
-  expect(localStorage.getItem).toBeCalledWith(key);
-});
-
-test('test click normal', () => {
-  const localStorageMock = {
-    getItem: jest.fn(),
-    setItem: jest.fn(),
-    clear: jest.fn()
-  };
-  global.localStorage = localStorageMock;
-  const { getByTestId } = render(<Post />);
-  fireEvent.click(getByTestId('display_posts'));
-  expect(localStorage.setItem).toBeCalledWith(key, JSON.stringify(value));
-});
-
-test('Test show post list', () => {
+test('displays initial posts', () => {
   const { container } = render(<PostDom postList={value}/>);
   const items = container.querySelectorAll('.post-main .number');
   expect(items).toHaveLength(2);
@@ -57,12 +30,19 @@ test('Test show post list', () => {
   expect(items[1].textContent).toBe(value[1].id.toString());
 });
 
-test('Test add post list', () => {
-  const putPostToStorage = jest.fn();
-  const getPosts = jest.fn();
+const putPostToStorage = jest.fn();
+const getPosts = jest.fn();
+
+test('add a new post', () => {
   window.alert = jest.fn();
 
-  const { getByText, getByTestId } = render(<AddPost postList={value} putPostToStorage={putPostToStorage} getPosts={getPosts}/>);
+  const { getByText, getByTestId } = 
+    render(
+      <AddPost 
+        postList={value} 
+        putPostToStorage={putPostToStorage}
+        getPosts={getPosts}
+        />);
   const topicInput = getByTestId('topic_input');
   const userInput = getByTestId('user_input');
   const descriptionInput = getByTestId('description_input');
@@ -80,21 +60,22 @@ test('Test add post list', () => {
   expect(items[2].textContent).toBe("3");
 });
 
-test('Test delete post list', () => {
-  const putPostToStorage = jest.fn();
-  const getPosts = jest.fn();
-  const { container, queryAllByTestId } = render(<PostDom postList={value} putPostToStorage={putPostToStorage} getPosts={getPosts}/>);
-  const firstDeleteBtn = queryAllByTestId('delete_post')[0];
-  fireEvent.click(firstDeleteBtn);
-
+test('delete a post', () => {
+  const { getByTestId } =
+    render(
+      <PostItem
+        item={value[0]}
+        postList={value}
+        putPostToStorage={putPostToStorage}
+        getPosts={getPosts}
+      />);
+  fireEvent.click(getByTestId('delete_post'));
+  const { container } = render(<PostDom postList={value}/>);
   const items = container.querySelectorAll('.post-main .number');
-  // expect(items).toHaveLength(2);
+  expect(items).toHaveLength(2);
 });
 
-
-test('Test edit post list', () => {
-  const putPostToStorage = jest.fn();
-  const getPosts = jest.fn();
+test('edit a post', () => {
   const { getByText, getByTestId } =
     render(
       <PostItem
